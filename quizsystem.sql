@@ -7,11 +7,13 @@ CREATE TABLE IF NOT EXISTS users (
 	user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     user_name VARCHAR(50) NOT NULL,
     user_password VARCHAR(50) NOT NULL,
-    is_admin bool
+    is_admin bool,
+    is_available bool
 );
 
-insert into users(user_name, user_password, is_admin) values ("user1", "1111", false),
-("user2", "2222", false), ("user3", "3333", true);
+insert into users(user_name, user_password, is_admin, is_available) values ("user1", "1111", false, true),
+("user2", "2222", false, true), ("user3", "3333", true, true);
+select * from users;
 
 drop table if exists questions;
 CREATE TABLE IF NOT EXISTS questions (
@@ -61,7 +63,28 @@ insert into questions(quiz_id, question_description) values
 (2, "qr_t"),
 (2, "rs_u"),
 (2, "st_v"),
-(2, "tu_w")
+(2, "tu_w"),
+
+(3, "*"),
+(3, "**"),
+(3, "***"),
+(3, "****"),
+(3, "*****"),
+(3, "******"),
+(3, "*******"),
+(3, "********"),
+(3, "*********"),
+(3, "**********"),
+(3, "***********"),
+(3, "************"),
+(3, "*************"),
+(3, "**************"),
+(3, "***************"),
+(3, "****************"),
+(3, "*****************"),
+(3, "******************"),
+(3, "*******************"),
+(3, "********************")
 ;
 select * from questions;
 
@@ -96,7 +119,7 @@ insert into all_options(question_id, option_description, is_correct) values
 (8, "10", true),
 (8, "4", false),
 (8, "10.0", true),
-(9, "3", false),
+(9, "8", false),
 (9, "3", true),
 (10, "5", false),
 (10, "4", true),
@@ -182,7 +205,54 @@ insert into all_options(question_id, option_description, is_correct) values
 (39, "t", false),
 (39, "r", false),
 (39, "y", false),
-(40, "V", true)
+(40, "V", true),
+
+(41, "1", true),
+(41, "2", false),
+(42, "1", false),
+(42, "2", true),
+(42, "3", false),
+(43, "3", true),
+(43, "33/11", true),
+(44, "1", false),
+(44, "1", false),
+(44, "1", false),
+(44, "4", true),
+(45, "5", true),
+(45, "1", false),
+(46, "6", true),
+(47, "7", true),
+(47, "8", false),
+(48, "8", true),
+(48, "1", false),
+(48, "2^3", true),
+(49, "1", false),
+(49, "9", true),
+(50, "10", true),
+(51, "1", false),
+(51, "11", true),
+(52, "11", false),
+(52, "14", false),
+(52, "12", true),
+(53, "4", false),
+(53, "13", true),
+(54, "14", true),
+(54, "13", false),
+(54, "12", false),
+(54, "11", false),
+(54, "10", false),
+(55, "15", true),
+(56, "15", false),
+(56, "16", true),
+(57, "17", true),
+(57, "1", false),
+(57, "13", false),
+(58, "15", false),
+(58, "18", true),
+(58, "3*6", true),
+(59, "19", true),
+(60, "20", true),
+(60, "2*2*5", true)
 ;
 select * from all_options;
 
@@ -193,7 +263,7 @@ CREATE TABLE IF NOT EXISTS quizzes (
     quiz_description VARCHAR(50)
 );
 
-insert into quizzes(quiz_type, quiz_description) values (1, "math"), (2, "alphabet");
+insert into quizzes(quiz_type, quiz_description) values (1, "math"), (2, "alphabet"), (3, "countstar");
 select * from quizzes;
 
 drop table if exists feedback;
@@ -204,6 +274,8 @@ CREATE TABLE IF NOT EXISTS feedback (
 );
 
 insert into feedback(feedback_comment, feedback_rating) values ("Good", 5), ("Normal", 3);
+
+select * from feedback;
 
 drop table if exists submissions;
 CREATE TABLE IF NOT EXISTS submissions (
