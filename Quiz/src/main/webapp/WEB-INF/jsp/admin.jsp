@@ -46,17 +46,35 @@
     <li><a href="/register">Register</a></li>
     <li><a href="/feedback">Feedback</a></li>
     <li><a href="/contact">Contact Us</a></li>
+    <li><a href="/logout">Logout</a></li>
 </ul>
+<h2>${sessionScope.msg}</h2>
 <h3>All users:</h3>
+<form method="post" action="admin">
 <c:forEach items="${sessionScope.AllUsers}" var="user">
     <div class="form-check">
-        ${user.id} ${user.username} ${user.password} ${user.admin}
+        ${user.id} ${user.username} ${user.password} ${user.admin} ${user.available}
+            <button class="btn btn-primary" name="disable_user_btn" type="submit" value="${user.id}">Disable/Enable</button>
     </div>
 </c:forEach>
+</form>
 <h3>All feedback:</h3>
 <c:forEach items="${sessionScope.AllFeedback}" var="feedback">
     <div class="form-check">
             ${feedback.id} ${feedback.rating} ${feedback.comment}
+    </div>
+</c:forEach>
+<h3>All Submissions:</h3>
+<c:forEach items="${sessionScope.AllSubmission}" var="submission">
+    <div class="form-check">
+            ${submission.id} ${submission.userId} ${submission.quizId} ${submission.score} ${submission.startTime} ${submission.endTime}
+    </div>
+</c:forEach>
+
+<h3>All Questions:</h3>
+<c:forEach items="${sessionScope.AllQuestion}" var="question">
+    <div class="form-check">
+            ${question.id} ${question.quizId} ${question.description}
     </div>
 </c:forEach>
 

@@ -30,4 +30,7 @@ public class UserService {
     public boolean exist(String username, String password) {
         return userDao.validateLogin(username, password).isPresent();
     }
+    public void disableEnableUser(int userId) {
+        userDao.disableEnableUser(userId);
+    }
 }

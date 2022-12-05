@@ -31,13 +31,13 @@ public class UserDao {
         return users.stream()
                 .filter(a -> a.getId() == id)
                 .findFirst()
-                .orElse(new User(-1, "N/A", "N/A", false));
+                .orElse(new User(-1, "N/A", "N/A", false, false));
     }
     public User getUserByName(String name) {
         return users.stream()
                 .filter(a -> a.getUsername().equals(name))
                 .findFirst()
-                .orElse(new User(-1, "N/A", "N/A", false));
+                .orElse(new User(-1, "N/A", "N/A", false, false));
     }
     public void createNewUser(User user) {
         users.add(user);
@@ -53,7 +53,7 @@ public class UserDao {
 
     public void register(String username, String password) {
         Session hibernateSession = HibernateUtil.getSessionFactory().openSession();
-        User user = new User(users.size()+1, username, password, false);
+        User user = new User(users.size()+1, username, password, false, true);
         Transaction tx =null;
         try {
             tx = hibernateSession.beginTransaction();
@@ -64,5 +64,11 @@ public class UserDao {
         }
         hibernateSession.close();
         users.add(user);
+    }
+
+    public void disableEnableUser(int id) {
+        for (User user: users) {
+            if (user.getId() == id) user.setAvailable(!user.isAvailable());
+        }
     }
 }

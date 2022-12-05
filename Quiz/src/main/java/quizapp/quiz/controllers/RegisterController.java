@@ -25,6 +25,7 @@ public class RegisterController {
     public String postRegister(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {
         if (userService.exist(username, password)) {
             HttpSession old = request.getSession(false);
+
             if (old != null) old.invalidate();
             return "register";
         } else {

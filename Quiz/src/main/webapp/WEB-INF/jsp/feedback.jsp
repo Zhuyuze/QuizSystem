@@ -82,6 +82,7 @@
     <li><a href="/register">Register</a></li>
     <li><a href="/feedback">Feedback</a></li>
     <li><a href="/contact">Contact Us</a></li>
+    <li><a href="/logout">Logout</a></li>
 </ul>
     <h1>Feedback</h1>
     <form method="post" style="margin: 50px">

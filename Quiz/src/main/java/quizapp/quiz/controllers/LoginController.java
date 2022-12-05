@@ -37,14 +37,17 @@ public class LoginController {
     @PostMapping("/login")
     public String postLogin(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {
         Optional<User> someUser = userService.validateLogin(username, password);
-        if (someUser.isPresent()) {
+        if (someUser.isPresent() && someUser.get().isAvailable()) {
             HttpSession old = request.getSession(false);
             if (old != null) old.invalidate();
             HttpSession newSession = request.getSession(true);
             User user = someUser.get();
             if (user.isAdmin()) {
+                newSession.setAttribute("User", user);
                 newSession.setAttribute("AllUsers", userService.getAll());
                 newSession.setAttribute("AllFeedback", feedbackService.getAll());
+                newSession.setAttribute("AllSubmission", quizService.getAllSubmission());
+                newSession.setAttribute("AllQuestion", quizService.getAllQuestion());
                 return "admin";
             } else {
                 newSession.setAttribute("User", user);
@@ -63,4 +66,5 @@ public class LoginController {
         if (old != null) old.invalidate();
         return "login";
     }
+
 }

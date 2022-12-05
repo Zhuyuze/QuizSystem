@@ -192,4 +192,11 @@ public class QuizDao {
             if (sd.getQuestionId() == questionId) sd.setQuestionId(-1);
         }
     }
+
+    public List<Submission> getSubmissions() {
+        return submissions;
+    }
+    public List<Question> getQuestions() {
+        return questions;
+    }
 }

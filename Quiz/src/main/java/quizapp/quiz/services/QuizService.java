@@ -50,4 +50,6 @@ public class QuizService {
     public List<Quiz> getAllQuizzes() {
         return quizDao.allQuizzes();
     }
+    public List<Submission> getAllSubmission() {return quizDao.getSubmissions();}
+    public List<Question> getAllQuestion() {return quizDao.getQuestions();}
 }
